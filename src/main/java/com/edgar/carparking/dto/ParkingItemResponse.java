@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ParkingSpotItemResponse {
+public class ParkingItemResponse {
     private Long id;
     private String address;
 }

@@ -21,9 +21,9 @@ public class BookingController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public ResponseEntity<Void> bookParkingSpot(@RequestBody BookingRequest bookingRequest) {
+    public ResponseEntity<Void> bookParking(@RequestBody BookingRequest bookingRequest) {
         Resident resident = authService.getCurrentResident();
-        Long bookingId = bookingService.bookParkingSpot(bookingRequest.getParkingSpotId(), resident);
+        Long bookingId = bookingService.bookParking(bookingRequest.getParkingId(), resident);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
@@ -35,9 +35,9 @@ public class BookingController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> releaseBookingSpot(@PathVariable Long id) {
+    public ResponseEntity<Void> releaseBooking(@PathVariable Long id) {
         Resident resident = authService.getCurrentResident();
-        bookingService.releaseParkingSpot(id, resident);
+        bookingService.releaseParking(id, resident);
         return ResponseEntity.ok().build();
     }
 

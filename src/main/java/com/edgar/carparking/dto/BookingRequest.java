@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BookingRequest {
-    private Long parkingSpotId;
+    private Long parkingId;
 }

@@ -22,7 +22,7 @@ public class Booking {
 
     @ManyToOne
     @JoinColumn(name = "parking_spot_id", nullable = false)
-    private ParkingSpot parkingSpot;
+    private Parking parking;
 
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;

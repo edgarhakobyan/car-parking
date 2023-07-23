@@ -7,6 +7,6 @@ import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class ParkingSpotResponse {
-    private List<ParkingSpotItemResponse> parkingSpotItems;
+public class ParkingResponse {
+    private List<ParkingItemResponse> parkingItems;
 }
