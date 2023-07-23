@@ -6,6 +6,7 @@ import com.edgar.carparking.dto.RegistrationRequest;
 import com.edgar.carparking.model.Community;
 import com.edgar.carparking.service.AuthService;
 import com.edgar.carparking.service.CommunityService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,6 +20,7 @@ import static org.springframework.http.HttpStatus.resolve;
 @RestController
 @RequestMapping("/api/auth")
 @AllArgsConstructor
+@Tag(name = "Authorization")
 public class AuthController {
     private final AuthService authService;
 

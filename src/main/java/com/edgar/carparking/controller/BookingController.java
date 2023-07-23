@@ -4,6 +4,9 @@ import com.edgar.carparking.dto.BookingRequest;
 import com.edgar.carparking.model.Resident;
 import com.edgar.carparking.service.AuthService;
 import com.edgar.carparking.service.BookingService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,12 +18,15 @@ import java.net.URI;
 @RestController
 @RequestMapping("/api/booking")
 @AllArgsConstructor
+@Tag(name = "Booking")
 public class BookingController {
     private final BookingService bookingService;
     private final AuthService authService;
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
+    @Operation(summary = "Book a parking", description = "Book a parking")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> bookParking(@RequestBody BookingRequest bookingRequest) {
         Resident resident = authService.getCurrentResident();
         Long bookingId = bookingService.bookParking(bookingRequest.getParkingId(), resident);
@@ -35,6 +41,8 @@ public class BookingController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Release a parking", description = "Release a parking")
+    @SecurityRequirement(name = "Bearer Authentication")
     public ResponseEntity<Void> releaseBooking(@PathVariable Long id) {
         Resident resident = authService.getCurrentResident();
         bookingService.releaseParking(id, resident);
