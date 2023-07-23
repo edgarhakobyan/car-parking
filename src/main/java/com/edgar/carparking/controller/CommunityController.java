@@ -1,7 +1,6 @@
 package com.edgar.carparking.controller;
 
 import com.edgar.carparking.dto.CommunityResponse;
-import com.edgar.carparking.repository.CommunityRepository;
 import com.edgar.carparking.service.CommunityService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;

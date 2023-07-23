@@ -3,9 +3,7 @@ package com.edgar.carparking.controller;
 import com.edgar.carparking.dto.AuthenticationResponse;
 import com.edgar.carparking.dto.LoginRequest;
 import com.edgar.carparking.dto.RegistrationRequest;
-import com.edgar.carparking.model.Community;
 import com.edgar.carparking.service.AuthService;
-import com.edgar.carparking.service.CommunityService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.resolve;
 
 @RestController
 @RequestMapping("/api/auth")

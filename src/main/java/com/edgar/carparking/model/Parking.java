@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.ColumnDefault;
 
 @Data
 @AllArgsConstructor
@@ -15,12 +16,13 @@ public class Parking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String address;
+    private String parkingNumber;
 
     @ManyToOne
     @JoinColumn(name = "community_id", nullable = false)
     private Community community;
 
-    @Column(name = "is_available", nullable = false)
-    private boolean isAvailable;
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private BookingStatus bookingStatus;
 }

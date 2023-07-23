@@ -3,7 +3,6 @@ package com.edgar.carparking.service;
 import com.edgar.carparking.dto.AuthenticationResponse;
 import com.edgar.carparking.dto.LoginRequest;
 import com.edgar.carparking.dto.RegistrationRequest;
-import com.edgar.carparking.exception.CarParkingException;
 import com.edgar.carparking.model.Community;
 import com.edgar.carparking.model.Resident;
 import com.edgar.carparking.repository.ResidentRepository;
@@ -18,8 +17,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -49,7 +46,7 @@ public class AuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String token = jwtProvider.generateToken(authentication);
 
-        return new AuthenticationResponse(1L, token);
+        return new AuthenticationResponse(token);
     }
 
     @Transactional(readOnly = true)

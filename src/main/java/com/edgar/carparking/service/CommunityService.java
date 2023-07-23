@@ -6,9 +6,6 @@ import com.edgar.carparking.exception.CarParkingException;
 import com.edgar.carparking.model.Community;
 import com.edgar.carparking.repository.CommunityRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

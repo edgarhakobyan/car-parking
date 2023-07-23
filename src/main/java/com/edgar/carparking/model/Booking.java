@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Data
 @AllArgsConstructor
@@ -23,10 +23,9 @@ public class Booking {
     @ManyToOne
     @JoinColumn(name = "parking_spot_id", nullable = false)
     private Parking parking;
+    private String carLicensePlate;
+    private Instant startTime;
 
-    @Column(name = "start_time", nullable = false)
-    private LocalDateTime startTime;
-
-    private LocalDateTime endTime;
+    private Instant endTime;
 
 }

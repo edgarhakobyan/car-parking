@@ -3,7 +3,6 @@ package com.edgar.carparking.service;
 import com.edgar.carparking.model.Resident;
 import com.edgar.carparking.repository.ResidentRepository;
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,10 +2,12 @@ package com.edgar.carparking.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-public class ParkingItemResponse {
-    private Long id;
+@NoArgsConstructor
+public class BookingResponse {
+    private Long bookingId;
     private String parkingNumber;
 }
