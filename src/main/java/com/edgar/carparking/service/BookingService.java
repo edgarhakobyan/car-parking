@@ -21,13 +21,14 @@ public class BookingService {
     private final ResidentRepository residentRepository;
 
     @Transactional
-    public Long bookParkingSpot(Long parkingSpotId, Long residentId) {
+    public Long bookParkingSpot(Long parkingSpotId, Resident resident) {
         ParkingSpot parkingSpot = parkingSpotRepository
                 .findById(parkingSpotId)
                 .orElseThrow(() -> new CarParkingException(String.format("Parking spot with id %s already booked", parkingSpotId)));
-        Resident resident = residentRepository
-                .findById(residentId)
-                .orElseThrow(() -> new CarParkingException(String.format("Resident not found with id %s", residentId)));
+        if (!parkingSpot.getCommunity().getId().equals(resident.getCommunity().getId())) {
+            throw new CarParkingException(String.format("The parking spot with id %s is not in your community with id %s",
+                    parkingSpotId, parkingSpot.getCommunity().getId()));
+        }
 
         Booking booking = new Booking();
         booking.setParkingSpot(parkingSpot);
@@ -43,7 +44,7 @@ public class BookingService {
     }
 
     @Transactional
-    public void releaseParkingSpot(Long bookingId) {
+    public void releaseParkingSpot(Long bookingId, Resident resident) {
         Booking booking = bookingRepository
                 .findById(bookingId)
                 .orElseThrow(() -> new CarParkingException(String.format("Booking with id %s not found", bookingId)));
@@ -52,11 +53,16 @@ public class BookingService {
                 .orElseThrow(() -> new CarParkingException(String.format(
                         "Parking spot not found with id %s", booking.getParkingSpot().getId())));
 
+        if (!booking.getResident().getId().equals(resident.getId())) {
+            throw new CarParkingException(String.format("You are not allowed to release that parking spot, resident id %s, parking resident id %s",
+                    resident.getId(), booking.getResident().getId()));
+        }
+
         booking.setEndTime(LocalDateTime.now());
 
         parkingSpot.setAvailable(true);
 
         bookingRepository.save(booking);
-        bookingRepository.save(booking);parkingSpotRepository.save(parkingSpot);
+        parkingSpotRepository.save(parkingSpot);
     }
 }

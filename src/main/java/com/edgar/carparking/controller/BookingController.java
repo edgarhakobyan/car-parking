@@ -1,6 +1,8 @@
 package com.edgar.carparking.controller;
 
 import com.edgar.carparking.dto.BookingRequest;
+import com.edgar.carparking.model.Resident;
+import com.edgar.carparking.service.AuthService;
 import com.edgar.carparking.service.BookingService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,12 +17,13 @@ import java.net.URI;
 @AllArgsConstructor
 public class BookingController {
     private final BookingService bookingService;
+    private final AuthService authService;
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
     public ResponseEntity<Void> bookParkingSpot(@RequestBody BookingRequest bookingRequest) {
-        Long userId = 1L;
-        Long bookingId = bookingService.bookParkingSpot(bookingRequest.getParkingSpotId(), userId);
+        Resident resident = authService.getCurrentResident();
+        Long bookingId = bookingService.bookParkingSpot(bookingRequest.getParkingSpotId(), resident);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequestUri()
@@ -33,7 +36,8 @@ public class BookingController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Void> releaseBookingSpot(@PathVariable Long id) {
-        bookingService.releaseParkingSpot(id);
+        Resident resident = authService.getCurrentResident();
+        bookingService.releaseParkingSpot(id, resident);
         return ResponseEntity.ok().build();
     }
 

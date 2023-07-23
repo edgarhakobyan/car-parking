@@ -26,9 +26,13 @@ public class ParkingSpotService {
         return new ParkingSpotResponse(parkingSpotItemResponseList);
     }
 
-    public ParkingSpotItemResponse getParkingSpotById(Long id) {
-        ParkingSpot parkingSpot = parkingSpotRepository.findById(id)
-                .orElseThrow(() -> new CarParkingException("Parking spot with id not found " + id));
+    public ParkingSpotItemResponse getParkingSpotById(Long parkingId, Long communityId) {
+        ParkingSpot parkingSpot = parkingSpotRepository.findById(parkingId)
+                .orElseThrow(() -> new CarParkingException("Parking spot with id not found " + parkingId));
+        if (!parkingSpot.getCommunity().getId().equals(communityId)) {
+            throw new CarParkingException(String.format("The parking spot with id %s is not in your community with id %s",
+                    parkingId, parkingSpot.getCommunity().getId()));
+        }
         return parkingSpotMapToResponse(parkingSpot);
     }
 
