@@ -4,7 +4,7 @@ System to manage car parking activities in different communities.
 
 
 # Run
-This is a simple spring boot application, you can use any idea sporting spring. (e.g. IntelliJ IDEA, STS)
+This is a simple spring boot application, use any idea supporting spring. (e.g. IntelliJ IDEA, STS)
 
 Command line 
 #### ./mvnw clean package
